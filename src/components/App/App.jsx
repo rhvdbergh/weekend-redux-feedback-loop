@@ -3,6 +3,7 @@ import axios from 'axios';
 import './App.css';
 import { Route, HashRouter as Router } from 'react-router-dom';
 import QuestionForm from '../QuestionForm/QuestionForm';
+import ReviewPage from '../ReviewPage/ReviewPage';
 
 function App() {
   return (
@@ -23,6 +24,9 @@ function App() {
         </Route>
         <Route path="/comments" exact>
           <QuestionForm questionType="comments" />
+        </Route>
+        <Route path="/review" exact>
+          <ReviewPage />
         </Route>
       </div>
     </Router>
