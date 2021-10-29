@@ -1,0 +1,39 @@
+[ ] server 
+
+[ ] Set up Router
+  [ ]
+
+[ ] views as components
+  [ ] How are you feeling today? /feeling
+    [ ] Input: number (1-5)
+    [ ] Next button
+      [ ] navigates to next page
+  [ ] How well are you understanding the content? /understanding
+    [ ] Input: number (1-5)
+    [ ] Next button
+      [ ] navigates to next page
+  [ ] How well are you being supported? /support
+    [ ] Input: number (1-5)
+    [ ] Next button
+      [ ] navigates to next page
+  [ ] Any comments you want to leave? /comments
+    [ ] Input: number (1-5)
+    [ ] Next button
+      [ ] navigates to next page
+
+[ ] Input validation for all forms, except comments
+
+[ ] Review page
+  [ ] Display current feedback
+  [ ] Submit button
+    [ ] Save feedback in database
+    [ ] Reset reducer
+
+[ ] Submission success page /success
+  [ ] Button for new feedback /feeling
+
+[ ] Redux
+  [ ] Set up redux in index.js
+  [ ] Reducer: Object with four types of feedback
+  [ ] CreateStore and combineReducers
+  [ ] Set up logger
