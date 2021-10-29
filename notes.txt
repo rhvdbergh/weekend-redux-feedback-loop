@@ -5,26 +5,26 @@
   [ ]
 
 [ ] views as components
-  [ ] How are you feeling today? /
-    [ ] Input: number (1-5)
-    [ ] Next button
+  [x] How are you feeling today? /
+    [x] Input: number (1-5)
+    [x] Next button
       [ ] navigates to next page
-  [ ] How well are you understanding the content? /understanding
-    [ ] Input: number (1-5)
-    [ ] Next button
+  [x] How well are you understanding the content? /understanding
+    [x] Input: number (1-5)
+    [x] Next button
       [ ] navigates to next page
-  [ ] How well are you being supported? /support
-    [ ] Input: number (1-5)
-    [ ] Next button
+  [x] How well are you being supported? /support
+    [x] Input: number (1-5)
+    [x] Next button
       [ ] navigates to next page
-  [ ] Any comments you want to leave? /comments
-    [ ] Input: number (1-5)
-    [ ] Next button
+  [x] Any comments you want to leave? /comments
+    [x] Input: number (1-5)
+    [x] Next button
       [ ] navigates to next page
 
 [ ] Input validation for all forms, except comments
 
-[ ] Review page
+[ ] Review page /review
   [ ] Display current feedback
   [ ] Submit button
     [ ] Save feedback in database
