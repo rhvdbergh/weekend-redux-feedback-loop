@@ -1,9 +1,13 @@
 import { useState } from 'react';
 import { useHistory } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 
 function QuestionForm({ questionType }) {
   // handle the local state for the form input
   const [inputValue, setInputValue] = useState('');
+
+  // set up the redux dispatch
+  const dispatch = useDispatch();
 
   // set up the useHistory hook
   const history = useHistory();
@@ -25,7 +29,14 @@ function QuestionForm({ questionType }) {
   };
 
   const handleClick = () => {
-    // TODO: set up dispatch
+    // send the redux action through a dispatch
+    // include the questionType and the content of this message as feedback
+    dispatch({
+      type: 'SET_FEEDBACK',
+      payload: { questionType, feedback: inputValue },
+    });
+    // reset the inputValue
+    setInputValue('');
     // move the user to the next page
     // this will move the user to the next page, depending on what this question is
     history.push(navigateFrom[questionType]);
