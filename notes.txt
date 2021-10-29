@@ -1,4 +1,5 @@
-[ ] server 
+[x] server 
+  [x] post route for database
 
 [ ] Set up Router
   [ ]
