@@ -29,17 +29,34 @@ function QuestionForm({ questionType }) {
   };
 
   const handleClick = () => {
-    // send the redux action through a dispatch
-    // include the questionType and the content of this message as feedback
-    dispatch({
-      type: 'SET_FEEDBACK',
-      payload: { questionType, feedback: inputValue },
-    });
-    // reset the inputValue
-    setInputValue('');
-    // move the user to the next page
-    // this will move the user to the next page, depending on what this question is
-    history.push(navigateFrom[questionType]);
+    // if this is a comments component, we don't worry about validation
+    // but for every other component, we have to have a number 1-5
+    // the logic here in pseudocode:
+    // if (not on the comments view AND the number includes) OR if on the comments view
+    // be careful with the 'string'.includes('') -> true (since it does include '')
+    // so we have to explicitly check if the string is empty
+    if (
+      (questionType !== 'comments' &&
+        '12345'.includes(inputValue) &&
+        inputValue !== '') ||
+      questionType === 'comments'
+    ) {
+      console.log(`you've made it through, inputValue is `, inputValue);
+      // send the redux action through a dispatch
+      // include the questionType and the content of this message as feedback
+      dispatch({
+        type: 'SET_FEEDBACK',
+        payload: { questionType, feedback: inputValue },
+      });
+      // reset the inputValue
+      setInputValue('');
+      // move the user to the next page
+      // this will move the user to the next page, depending on what this question is
+      history.push(navigateFrom[questionType]);
+    } else {
+      // if we land here, the user has the wrong input
+      alert('Please enter a number from 1 to 5.');
+    }
   };
 
   return (
