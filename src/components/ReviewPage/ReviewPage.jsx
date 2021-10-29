@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { useSelector } from 'react-redux';
-import { useHistory } from 'react-router';
+import { useHistory } from 'react-router-dom';
 
 function ReviewPage() {
   // retrieve the feedback from the redux store

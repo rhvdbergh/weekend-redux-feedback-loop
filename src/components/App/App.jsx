@@ -4,6 +4,7 @@ import './App.css';
 import { Route, HashRouter as Router } from 'react-router-dom';
 import QuestionForm from '../QuestionForm/QuestionForm';
 import ReviewPage from '../ReviewPage/ReviewPage';
+import SuccessPage from '../SuccessPage/SuccessPage';
 
 function App() {
   return (
@@ -27,6 +28,9 @@ function App() {
         </Route>
         <Route path="/review" exact>
           <ReviewPage />
+        </Route>
+        <Route path="/success" exact>
+          <SuccessPage />
         </Route>
       </div>
     </Router>

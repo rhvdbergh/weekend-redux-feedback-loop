@@ -19,8 +19,10 @@ const feedback = (state = initialFeedbackState, action) => {
   // respond to actions
   if (action.type === 'SET_FEEDBACK') {
     return { ...state, [action.payload.questionType]: action.payload.feedback };
+  } else if (action.type === 'RESET_FEEDBACK') {
+    // reset by setting the state back to the initial state
+    return initialFeedbackState;
   }
-
   // the default is to return state as is
   return state;
 };
