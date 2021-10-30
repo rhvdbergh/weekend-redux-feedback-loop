@@ -6,9 +6,11 @@ const pool = require('../modules/pool.js');
 router.get('/', (req, res) => {
   console.log('GET /admin');
   // build the SQL query
+  // the additional order by "id" is necessary to keep the
+  // correct order, some dates are equivalent to SQL, fetches in wrong order
   let query = `
     SELECT * FROM "feedback"
-    ORDER BY "date" DESC, "id";
+    ORDER BY "date" DESC, "id"; 
   `;
   pool
     .query(query)

@@ -41,10 +41,7 @@ function AdminPage() {
 
   return (
     <Container>
-      <Typography variant="h3" sx={{ mb: '50px' }}>
-        Feedback Results
-      </Typography>
-      <TableContainer>
+      <TableContainer sx={{ mt: '75px' }}>
         <Table>
           <TableHead>
             <TableRow>

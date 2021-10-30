@@ -1,8 +1,10 @@
-function Header() {
+import { Typography } from '@mui/material';
+
+function Header({ title, subtitle }) {
   return (
     <header className="App-header">
-      <h1 className="App-title">Feedback!</h1>
-      <h4>Don't forget it!</h4>
+      <Typography variant="h1">{title}</Typography>
+      {subtitle && <Typography variant="h6">{subtitle}</Typography>}
     </header>
   );
 }
