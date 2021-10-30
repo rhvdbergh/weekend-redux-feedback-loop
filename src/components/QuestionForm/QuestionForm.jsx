@@ -1,10 +1,16 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 function QuestionForm({ questionType }) {
   // handle the local state for the form input
   const [inputValue, setInputValue] = useState('');
+
+  const initialValue = useSelector((store) => store.feedback[questionType]);
+
+  useEffect(() => {
+    setInputValue(initialValue);
+  }, []);
 
   // set up the redux dispatch
   const dispatch = useDispatch();
@@ -12,12 +18,21 @@ function QuestionForm({ questionType }) {
   // set up the useHistory hook
   const history = useHistory();
 
-  // object to help navigation
-  const navigateFrom = {
+  // object to help navigation forward
+  const navigateForwardFrom = {
     feeling: 'understanding',
     understanding: 'support',
     support: 'comments',
     comments: 'review',
+  };
+
+  // object to help navigation backward
+  // at feeling, there should be no back button,
+  // so nowhere to navigate to
+  const navigateBackwardFrom = {
+    understanding: '/',
+    support: 'understanding',
+    comments: 'support',
   };
 
   // set the message depending on what kind of question we're dealing with
@@ -49,10 +64,10 @@ function QuestionForm({ questionType }) {
         payload: { questionType, feedback: inputValue },
       });
       // reset the inputValue
-      setInputValue('');
+      // setInputValue('');
       // move the user to the next page
       // this will move the user to the next page, depending on what this question is
-      history.push(navigateFrom[questionType]);
+      history.push(navigateForwardFrom[questionType]);
     } else {
       // if we land here, the user has the wrong input
       alert('Please enter a number from 1 to 5.');
@@ -70,6 +85,7 @@ function QuestionForm({ questionType }) {
         <input
           type="text"
           value={inputValue}
+          placeholder="Enter optional comments ..."
           onChange={(event) => setInputValue(event.target.value)}
         />
       ) : (
@@ -81,6 +97,15 @@ function QuestionForm({ questionType }) {
           min="1"
           onChange={(event) => setInputValue(event.target.value)}
         />
+      )}
+      {/* Conditional rendering of the back button 
+          which should not display on the feelings view*/}
+      {questionType !== 'feeling' && (
+        <button
+          onClick={() => history.push(navigateBackwardFrom[questionType])}
+        >
+          Back
+        </button>
       )}
       <button onClick={handleClick}>Next</button>
     </div>
