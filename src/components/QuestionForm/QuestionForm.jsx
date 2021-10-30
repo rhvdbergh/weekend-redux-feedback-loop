@@ -129,8 +129,10 @@ function QuestionForm({ questionType }) {
           <ButtonGroup variant="contained" color="primary">
             {/* Conditional rendering of the back button 
           which should not display on the feelings view*/}
-            {questionType !== 'feeling' && (
+            {questionType !== 'feeling' ? (
               <Button onClick={() => handleClick('backward')}>Back</Button>
+            ) : (
+              <Button disabled>Back</Button>
             )}
             <Button onClick={() => handleClick('forward')}>Next</Button>
           </ButtonGroup>
