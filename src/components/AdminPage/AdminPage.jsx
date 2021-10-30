@@ -41,14 +41,17 @@ function AdminPage() {
 
   return (
     <Container>
+      <Typography variant="h3" sx={{ mb: '50px' }}>
+        Feedback Results
+      </Typography>
       <TableContainer>
         <Table>
           <TableHead>
             <TableRow>
-              <TableCell sx={{ width: '10%' }}>Feeling</TableCell>
-              <TableCell sx={{ width: '10%' }}>Comprehension</TableCell>
-              <TableCell sx={{ width: '10%' }}>Support</TableCell>
-              <TableCell sx={{ width: '60%' }}>Comments</TableCell>
+              <TableCell sx={{ width: '12%' }}>Feeling</TableCell>
+              <TableCell sx={{ width: '12%' }}>Comprehension</TableCell>
+              <TableCell sx={{ width: '12%' }}>Support</TableCell>
+              <TableCell sx={{ width: '54%' }}>Comments</TableCell>
               <TableCell sx={{ width: '5%' }}>Flagged</TableCell>
               <TableCell sx={{ width: '5%' }}>Delete</TableCell>
             </TableRow>
