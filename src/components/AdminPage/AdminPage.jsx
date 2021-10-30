@@ -54,7 +54,11 @@ function AdminPage() {
           </TableHead>
           <TableBody>
             {feedbackList.map((feedback, id) => (
-              <FeedBackListItem key={id} feedback={feedback} />
+              <FeedBackListItem
+                key={id}
+                feedback={feedback}
+                fetchFeedback={fetchFeedback}
+              />
             ))}
           </TableBody>
         </Table>
