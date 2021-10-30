@@ -12,6 +12,8 @@ import {
 } from '@mui/material';
 import RadioButtonUncheckedIcon from '@mui/icons-material/RadioButtonUnchecked';
 import RadioButtonCheckedIcon from '@mui/icons-material/RadioButtonChecked';
+import { useState } from 'react';
+import FeedbackModal from '../FeedbackModal/FeedbackModal';
 
 function ReviewPage() {
   // retrieve the feedback from the redux store
@@ -20,12 +22,33 @@ function ReviewPage() {
   // set up the redux dispatch hook
   const dispatch = useDispatch();
 
+  // local state for the delete confirmation modal
+  const [openModal, setOpenModal] = useState(false);
+
   // set up the history in order to navigate using the useHistory hook
   const history = useHistory();
 
   console.log(`feedback`, feedback);
 
-  const handleSubmit = () => {
+  const validateSubmission = () => {
+    if (
+      // validate this submission; it must include numbers 1-5 for
+      // feeling, understanding, and support
+      '12345'.includes(feedback.feeling) &&
+      feedback.feeling !== '' &&
+      '12345'.includes(feedback.understanding) &&
+      feedback.understanding !== '' &&
+      '12345'.includes(feedback.support) &&
+      feedback.support !== ''
+    ) {
+      submitToServer();
+    } else {
+      // open the modal to explain to the user that more info is needed
+      setOpenModal(true);
+    }
+  };
+
+  const submitToServer = () => {
     axios
       .post(`/submit`, feedback)
       .then((response) => {
@@ -103,10 +126,17 @@ function ReviewPage() {
           <ButtonGroup variant="contained">
             {/* Will navigate back to the comments page, where users can navigate back further */}
             <Button onClick={() => history.push('/comments')}>Back</Button>
-            <Button onClick={handleSubmit}>Submit</Button>
+            <Button onClick={validateSubmission}>Submit</Button>
           </ButtonGroup>
         </Box>
       </Paper>
+      <FeedbackModal
+        openModal={openModal}
+        onModalReject={() => setOpenModal(false)}
+        onModalAccept={() => setOpenModal(false)}
+        message="Please navigate back and provide feedback for feeling, understanding, and support."
+        acceptButton="OK"
+      />
     </Container>
   );
 }

@@ -35,7 +35,9 @@ function FeedbackModal({
           <Typography variant="h5">{message}</Typography>
         </Box>
         <Box sx={{ display: 'flex', justifyContent: 'flex-end' }}>
-          <Button onClick={onModalReject}>{rejectButton}</Button>
+          {rejectButton && (
+            <Button onClick={onModalReject}>{rejectButton}</Button>
+          )}
           <Button onClick={onModalAccept}>{acceptButton}</Button>
         </Box>
       </Box>
