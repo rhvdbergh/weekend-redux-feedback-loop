@@ -30,7 +30,7 @@ function ReviewPage() {
 
   console.log(`feedback`, feedback);
 
-  const validateSubmission = () => {
+  const isValidSubmission = () => {
     if (
       // validate this submission; it must include numbers 1-5 for
       // feeling, understanding, and support
@@ -41,26 +41,30 @@ function ReviewPage() {
       '12345'.includes(feedback.support) &&
       feedback.support !== ''
     ) {
-      submitToServer();
-    } else {
-      // open the modal to explain to the user that more info is needed
-      setOpenModal(true);
+      return true;
     }
+    return false;
   };
 
-  const submitToServer = () => {
-    axios
-      .post(`/submit`, feedback)
-      .then((response) => {
-        console.log(response);
-        // take the user to the success page
-        history.push('/success');
-        // reset the redux store on success
-        dispatch({ type: 'RESET_FEEDBACK' });
-      })
-      .catch((err) => {
-        console.log(`There was an error posting to the server:`, err);
-      });
+  const handleSubmit = () => {
+    if (isValidSubmission) {
+      // validate the input
+      axios
+        .post(`/submit`, feedback)
+        .then((response) => {
+          console.log(response);
+          // take the user to the success page
+          history.push('/success');
+          // reset the redux store on success
+          dispatch({ type: 'RESET_FEEDBACK' });
+        })
+        .catch((err) => {
+          console.log(`There was an error posting to the server:`, err);
+        });
+    } else {
+      // this is not a valid submission; open the modal to tell the user
+      setOpenModal(true);
+    }
   };
 
   return (
@@ -126,7 +130,12 @@ function ReviewPage() {
           <ButtonGroup variant="contained">
             {/* Will navigate back to the comments page, where users can navigate back further */}
             <Button onClick={() => history.push('/comments')}>Back</Button>
-            <Button onClick={validateSubmission}>Submit</Button>
+            {/* Disable the submission button if validation does not pass */}
+            {isValidSubmission() ? (
+              <Button onClick={handleSubmit}>Submit</Button>
+            ) : (
+              <Button disabled>Submit</Button>
+            )}
           </ButtonGroup>
         </Box>
       </Paper>

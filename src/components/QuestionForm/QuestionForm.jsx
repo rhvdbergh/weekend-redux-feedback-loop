@@ -52,11 +52,8 @@ function QuestionForm({ questionType }) {
     comments: 'Any comments you want to leave?',
   };
 
-  // this handles clicks for both the forward and the backward button
-  // users are obliged to enter information in the box before they navigate
-  // this solves a problem where the user's entry was lost on clicking back
-  // without having stored that entry in the redux store
-  const handleClick = (direction) => {
+  // validate the submission
+  const isValidSubmission = () => {
     // if this is a comments component, we don't worry about validation
     // but for every other component, we have to have a number 1-5
     // the logic here in pseudocode:
@@ -69,6 +66,17 @@ function QuestionForm({ questionType }) {
         inputValue !== '') ||
       questionType === 'comments'
     ) {
+      return true;
+    }
+    return false;
+  };
+
+  // this handles clicks for both the forward and the backward button
+  // users are obliged to enter information in the box before they navigate
+  // this solves a problem where the user's entry was lost on clicking back
+  // without having stored that entry in the redux store
+  const handleClick = (direction) => {
+    if (isValidSubmission() || direction === 'backward') {
       // send the redux action through a dispatch
       // include the questionType and the content of this message as feedback
       dispatch({
@@ -83,6 +91,7 @@ function QuestionForm({ questionType }) {
         : history.push(navigateBackwardFrom[questionType]);
     } else {
       // if we land here, the user has the wrong input
+      // this shouldn't really be possible, since the button should be disabled
       alert('Please enter a number from 1 to 5.');
     }
   };
@@ -128,13 +137,19 @@ function QuestionForm({ questionType }) {
         <Box sx={{ pb: '50px' }}>
           <ButtonGroup variant="contained" color="primary">
             {/* Conditional rendering of the back button 
-          which should not display on the feelings view*/}
+          which should not be enabled on the feelings view
+            it should be there as a placeholder, though*/}
             {questionType !== 'feeling' ? (
               <Button onClick={() => handleClick('backward')}>Back</Button>
             ) : (
               <Button disabled>Back</Button>
             )}
-            <Button onClick={() => handleClick('forward')}>Next</Button>
+            {/* Conditional rendering of the forward button - only allow if entry valid */}
+            {isValidSubmission() ? (
+              <Button onClick={() => handleClick('forward')}>Next</Button>
+            ) : (
+              <Button disabled>Next</Button>
+            )}
           </ButtonGroup>
         </Box>
       </Paper>
