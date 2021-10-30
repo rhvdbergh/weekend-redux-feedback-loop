@@ -1,38 +1,45 @@
 import React from 'react';
-import axios from 'axios';
 import './App.css';
 import { Route, HashRouter as Router } from 'react-router-dom';
 import QuestionForm from '../QuestionForm/QuestionForm';
 import ReviewPage from '../ReviewPage/ReviewPage';
 import SuccessPage from '../SuccessPage/SuccessPage';
+import Header from '../Header/Header';
+import { Box } from '@mui/system';
+import AdminPage from '../AdminPage/AdminPage';
 
 function App() {
   return (
     <Router>
-      <div className="App">
-        <header className="App-header">
-          <h1 className="App-title">Feedback!</h1>
-          <h4>Don't forget it!</h4>
-        </header>
+      <Box className="App">
         <Route path="/" exact>
+          <Header title="Feedback!" subtitle="Don't forget it!" />
           <QuestionForm questionType="feeling" />
         </Route>
         <Route path="/understanding" exact>
+          <Header title="Feedback!" subtitle="Don't forget it!" />
           <QuestionForm questionType="understanding" />
         </Route>
         <Route path="/support" exact>
+          <Header title="Feedback!" subtitle="Don't forget it!" />
           <QuestionForm questionType="support" />
         </Route>
         <Route path="/comments" exact>
+          <Header title="Feedback!" subtitle="Don't forget it!" />
           <QuestionForm questionType="comments" />
         </Route>
         <Route path="/review" exact>
+          <Header title="Feedback!"></Header>
           <ReviewPage />
         </Route>
         <Route path="/success" exact>
           <SuccessPage />
         </Route>
-      </div>
+        <Route path="/admin" exact>
+          <Header title="Feedback Results" />
+          <AdminPage />
+        </Route>
+      </Box>
     </Router>
   );
 }
