@@ -48,5 +48,30 @@ router.delete('/:id', (req, res) => {
 });
 
 // TODO: PUT route to toggle flag
+router.put('/:id', (req, res) => {
+  console.log(`PUT /admin/${req.params.id}`);
+
+  // build the SQL query
+  let query = `
+    UPDATE "feedback"
+    SET "flagged" = NOT "flagged"
+    WHERE "id" = $1;
+  `;
+
+  // parameterize the input
+  let values = [req.params.id];
+
+  // run the SQL query
+  pool
+    .query(query, values)
+    .then((response) => {
+      // send the client a 200 response, indicating update complete
+      res.sendStatus(200);
+    })
+    .catch((err) => {
+      console.log(`There was an error updating data in the database:`, err);
+      res.sendStatus(500); // let the client know something went wrong
+    });
+});
 
 module.exports = router;
