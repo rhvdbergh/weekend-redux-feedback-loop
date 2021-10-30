@@ -10,6 +10,7 @@ import {
 } from '@mui/material';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
+import FeedBackListItem from '../FeedbackListItem/FeedbackListItem';
 
 // nothing in this page needs to use redux,
 // since the state isn't shared with any other component
@@ -39,7 +40,6 @@ function AdminPage() {
 
   return (
     <Box>
-      <Typography>Hello, admin.</Typography>
       <TableContainer>
         <Table>
           <TableHead>
@@ -52,7 +52,11 @@ function AdminPage() {
               <TableCell>Delete</TableCell>
             </TableRow>
           </TableHead>
-          <TableBody>{feedbackList.map((feedback) => {})}</TableBody>
+          <TableBody>
+            {feedbackList.map((feedback, id) => (
+              <FeedBackListItem key={id} feedback={feedback} />
+            ))}
+          </TableBody>
         </Table>
       </TableContainer>
     </Box>
