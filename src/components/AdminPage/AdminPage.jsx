@@ -1,4 +1,13 @@
-import { Box, Typography } from '@mui/material';
+import {
+  Box,
+  Typography,
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+} from '@mui/material';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 
@@ -31,6 +40,21 @@ function AdminPage() {
   return (
     <Box>
       <Typography>Hello, admin.</Typography>
+      <TableContainer>
+        <Table>
+          <TableHead>
+            <TableRow>
+              <TableCell>Feeling</TableCell>
+              <TableCell>Comprehension</TableCell>
+              <TableCell>Support</TableCell>
+              <TableCell>Comments</TableCell>
+              <TableCell>Flagged</TableCell>
+              <TableCell>Delete</TableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody>{feedbackList.map((feedback) => {})}</TableBody>
+        </Table>
+      </TableContainer>
     </Box>
   );
 }
