@@ -12,9 +12,9 @@ import '@fontsource/roboto/700.css';
 
 // dummy data for initial reducer state
 const initialFeedbackState = {
-  feeling: '',
-  understanding: '',
-  support: '',
+  feeling: 0,
+  understanding: 0,
+  support: 0,
   comments: '',
 };
 

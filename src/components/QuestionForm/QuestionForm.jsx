@@ -5,6 +5,10 @@ import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import ButtonGroup from '@mui/material/ButtonGroup';
 import TextField from '@mui/material/TextField';
+import Rating from '@mui/material/Rating';
+import Typography from '@mui/material/Typography';
+import RadioButtonUncheckedIcon from '@mui/icons-material/RadioButtonUnchecked';
+import RadioButtonCheckedIcon from '@mui/icons-material/RadioButtonChecked';
 
 function QuestionForm({ questionType }) {
   // handle the local state for the form input
@@ -86,7 +90,7 @@ function QuestionForm({ questionType }) {
     <Box>
       {/* Picks the corresponding message for this questionType
       from the messageFor object  */}
-      <p>{messageFor[questionType]}</p>
+      <Typography>{messageFor[questionType]}</Typography>
       {/* Conditional rendering of type of input */}
       {/* We need a number box for everything except comments */}
       {questionType === 'comments' ? (
@@ -97,12 +101,11 @@ function QuestionForm({ questionType }) {
           onChange={(event) => setInputValue(event.target.value)}
         />
       ) : (
-        <input
-          type="number"
-          value={inputValue}
-          required
-          max="5"
-          min="1"
+        <Rating
+          value={Number(inputValue)}
+          color="primary"
+          icon={<RadioButtonCheckedIcon />}
+          emptyIcon={<RadioButtonUncheckedIcon />}
           onChange={(event) => setInputValue(event.target.value)}
         />
       )}
