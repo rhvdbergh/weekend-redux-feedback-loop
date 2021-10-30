@@ -1,5 +1,4 @@
 import React from 'react';
-import axios from 'axios';
 import './App.css';
 import { Route, HashRouter as Router } from 'react-router-dom';
 import QuestionForm from '../QuestionForm/QuestionForm';
@@ -7,6 +6,7 @@ import ReviewPage from '../ReviewPage/ReviewPage';
 import SuccessPage from '../SuccessPage/SuccessPage';
 import Header from '../Header/Header';
 import { Box } from '@mui/system';
+import AdminPage from '../AdminPage/AdminPage';
 
 function App() {
   return (
@@ -30,6 +30,9 @@ function App() {
         </Route>
         <Route path="/success" exact>
           <SuccessPage />
+        </Route>
+        <Route path="/admin" exact>
+          <AdminPage />
         </Route>
       </Box>
     </Router>
