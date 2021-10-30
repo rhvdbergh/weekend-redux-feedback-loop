@@ -8,7 +8,7 @@ router.get('/', (req, res) => {
   // build the SQL query
   let query = `
     SELECT * FROM "feedback"
-    ORDER BY "date" DESC;
+    ORDER BY "date" DESC, "id";
   `;
   pool
     .query(query)

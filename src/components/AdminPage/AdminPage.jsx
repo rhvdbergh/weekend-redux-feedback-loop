@@ -1,5 +1,6 @@
 import {
   Box,
+  Container,
   Typography,
   Table,
   TableBody,
@@ -39,17 +40,17 @@ function AdminPage() {
   };
 
   return (
-    <Box>
+    <Container>
       <TableContainer>
         <Table>
           <TableHead>
             <TableRow>
-              <TableCell>Feeling</TableCell>
-              <TableCell>Comprehension</TableCell>
-              <TableCell>Support</TableCell>
-              <TableCell>Comments</TableCell>
-              <TableCell>Flagged</TableCell>
-              <TableCell>Delete</TableCell>
+              <TableCell sx={{ width: '10%' }}>Feeling</TableCell>
+              <TableCell sx={{ width: '10%' }}>Comprehension</TableCell>
+              <TableCell sx={{ width: '10%' }}>Support</TableCell>
+              <TableCell sx={{ width: '60%' }}>Comments</TableCell>
+              <TableCell sx={{ width: '5%' }}>Flagged</TableCell>
+              <TableCell sx={{ width: '5%' }}>Delete</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
@@ -63,7 +64,7 @@ function AdminPage() {
           </TableBody>
         </Table>
       </TableContainer>
-    </Box>
+    </Container>
   );
 }
 
