@@ -1,10 +1,16 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 function QuestionForm({ questionType }) {
   // handle the local state for the form input
   const [inputValue, setInputValue] = useState('');
+
+  const initialValue = useSelector((store) => store.feedback[questionType]);
+
+  useEffect(() => {
+    setInputValue(initialValue);
+  }, []);
 
   // set up the redux dispatch
   const dispatch = useDispatch();
@@ -12,12 +18,21 @@ function QuestionForm({ questionType }) {
   // set up the useHistory hook
   const history = useHistory();
 
-  // object to help navigation
-  const navigateFrom = {
-    feeling: 'understanding',
-    understanding: 'support',
-    support: 'comments',
-    comments: 'review',
+  // object to help navigation forward
+  const navigateForwardFrom = {
+    feeling: '/understanding',
+    understanding: '/support',
+    support: '/comments',
+    comments: '/review',
+  };
+
+  // object to help navigation backward
+  // at feeling, there should be no back button,
+  // so nowhere to navigate to
+  const navigateBackwardFrom = {
+    understanding: '/',
+    support: '/understanding',
+    comments: '/support',
   };
 
   // set the message depending on what kind of question we're dealing with
@@ -28,7 +43,11 @@ function QuestionForm({ questionType }) {
     comments: 'Any comments you want to leave?',
   };
 
-  const handleClick = () => {
+  // this handles clicks for both the forward and the backward button
+  // users are obliged to enter information in the box before they navigate
+  // this solves a problem where the user's entry was lost on clicking back
+  // without having stored that entry in the redux store
+  const handleClick = (direction) => {
     // if this is a comments component, we don't worry about validation
     // but for every other component, we have to have a number 1-5
     // the logic here in pseudocode:
@@ -41,18 +60,18 @@ function QuestionForm({ questionType }) {
         inputValue !== '') ||
       questionType === 'comments'
     ) {
-      console.log(`you've made it through, inputValue is `, inputValue);
       // send the redux action through a dispatch
       // include the questionType and the content of this message as feedback
       dispatch({
         type: 'SET_FEEDBACK',
         payload: { questionType, feedback: inputValue },
       });
-      // reset the inputValue
-      setInputValue('');
       // move the user to the next page
-      // this will move the user to the next page, depending on what this question is
-      history.push(navigateFrom[questionType]);
+      // this will move the user forward or backward
+      // depending on direction and where we are in the view (i.e., the questionType)
+      direction === 'forward'
+        ? history.push(navigateForwardFrom[questionType])
+        : history.push(navigateBackwardFrom[questionType]);
     } else {
       // if we land here, the user has the wrong input
       alert('Please enter a number from 1 to 5.');
@@ -70,6 +89,7 @@ function QuestionForm({ questionType }) {
         <input
           type="text"
           value={inputValue}
+          placeholder="Enter optional comments ..."
           onChange={(event) => setInputValue(event.target.value)}
         />
       ) : (
@@ -82,7 +102,12 @@ function QuestionForm({ questionType }) {
           onChange={(event) => setInputValue(event.target.value)}
         />
       )}
-      <button onClick={handleClick}>Next</button>
+      {/* Conditional rendering of the back button 
+          which should not display on the feelings view*/}
+      {questionType !== 'feeling' && (
+        <button onClick={() => handleClick('backward')}>Back</button>
+      )}
+      <button onClick={() => handleClick('forward')}>Next</button>
     </div>
   );
 }
