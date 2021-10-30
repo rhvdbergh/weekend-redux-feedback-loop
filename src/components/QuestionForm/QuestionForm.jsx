@@ -90,10 +90,10 @@ function QuestionForm({ questionType }) {
       {/* Conditional rendering of type of input */}
       {/* We need a number box for everything except comments */}
       {questionType === 'comments' ? (
-        <input
-          type="text"
+        <TextField
+          label="Optional comments ..."
           value={inputValue}
-          placeholder="Enter optional comments ..."
+          variant="outlined"
           onChange={(event) => setInputValue(event.target.value)}
         />
       ) : (
