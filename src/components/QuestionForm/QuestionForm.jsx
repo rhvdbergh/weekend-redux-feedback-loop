@@ -88,19 +88,21 @@ function QuestionForm({ questionType }) {
   };
 
   return (
-    <Container maxWidth="sm">
+    <Container maxWidth="sm" sx={{ mt: '80px' }}>
       <Paper
         elevation="6"
         sx={{
-          height: 400,
+          height: 350,
           display: 'flex',
           flexDirection: 'column',
-          justifyContent: 'space-evenly',
+          justifyContent: 'space-between',
         }}
       >
         {/* Picks the corresponding message for this questionType
       from the messageFor object  */}
-        <Typography>{messageFor[questionType]}</Typography>
+        <Box sx={{ pt: '50px' }}>
+          <Typography variant="h5">{messageFor[questionType]}</Typography>
+        </Box>
         <Box>
           {/* Conditional rendering of type of input */}
           {/* We need a number box for everything except comments */}
@@ -117,14 +119,13 @@ function QuestionForm({ questionType }) {
           ) : (
             <Rating
               value={Number(inputValue)}
-              color="primary"
               icon={<RadioButtonCheckedIcon />}
               emptyIcon={<RadioButtonUncheckedIcon />}
               onChange={(event) => setInputValue(event.target.value)}
             />
           )}
         </Box>
-        <Box>
+        <Box sx={{ pb: '50px' }}>
           <ButtonGroup variant="contained" color="primary">
             {/* Conditional rendering of the back button 
           which should not display on the feelings view*/}

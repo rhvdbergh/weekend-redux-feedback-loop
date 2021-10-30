@@ -10,7 +10,7 @@ function SuccessPage() {
       <Paper
         elevation="6"
         sx={{
-          height: 400,
+          height: 350,
           display: 'flex',
           flexDirection: 'column',
           justifyContent: 'space-evenly',
