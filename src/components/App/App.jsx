@@ -5,15 +5,14 @@ import { Route, HashRouter as Router } from 'react-router-dom';
 import QuestionForm from '../QuestionForm/QuestionForm';
 import ReviewPage from '../ReviewPage/ReviewPage';
 import SuccessPage from '../SuccessPage/SuccessPage';
+import Header from '../Header/Header';
+import { Box } from '@mui/system';
 
 function App() {
   return (
     <Router>
-      <div className="App">
-        <header className="App-header">
-          <h1 className="App-title">Feedback!</h1>
-          <h4>Don't forget it!</h4>
-        </header>
+      <Box className="App">
+        <Header />
         <Route path="/" exact>
           <QuestionForm questionType="feeling" />
         </Route>
@@ -32,7 +31,7 @@ function App() {
         <Route path="/success" exact>
           <SuccessPage />
         </Route>
-      </div>
+      </Box>
     </Router>
   );
 }

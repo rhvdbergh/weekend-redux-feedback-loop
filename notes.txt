@@ -24,17 +24,32 @@
 
 [x] Input validation for all forms, except comments
 
-[ ] Review page /review
-  [ ] Display current feedback
-  [ ] Submit button
-    [ ] Save feedback in database
-    [ ] Reset reducer
+[x] Review page /review
+  [x] Display current feedback
+  [x] Submit button
+    [x] Save feedback in database
+    [x] Reset reducer
 
-[ ] Submission success page /success
-  [ ] Button for new feedback /feeling
+[x] Submission success page /success
+  [x] Button for new feedback /feeling
 
-[ ] Redux
-  [ ] Set up redux in index.js
-  [ ] Reducer: Object with four types of feedback
-  [ ] CreateStore and combineReducers
-  [ ] Set up logger
+[x] Redux
+  [x] Set up redux in index.js
+  [x] Reducer: Object with four types of feedback
+  [x] CreateStore and combineReducers
+  [x] Set up logger
+
+  ----- STRETCH
+  ADMIN PAGE 
+
+  [ ] Server route GET /admin 
+    [ ] Router
+    [ ] Order by date - most recent first
+
+  [ ] Admin view
+    [ ] Feedback results header?
+    [ ] table
+      [ ] displays detail
+      [ ] delete button (delete by id route) DELETE /admin/:id 
+        [ ] prompt before delete
+      [ ] flag button (put route) UPDATE /admin/:id
