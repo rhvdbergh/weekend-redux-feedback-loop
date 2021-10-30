@@ -1,3 +1,4 @@
+import { Container, Paper, Button, Box } from '@mui/material';
 import { useHistory } from 'react-router-dom';
 
 function SuccessPage() {
@@ -5,10 +6,28 @@ function SuccessPage() {
   const history = useHistory();
 
   return (
-    <div>
-      <h2>Thank You!</h2>
-      <button onClick={() => history.push('/')}>Leave New Feedback</button>
-    </div>
+    <Container maxWidth="sm">
+      <Paper
+        elevation="6"
+        sx={{
+          height: 350,
+          display: 'flex',
+          flexDirection: 'column',
+          justifyContent: 'space-evenly',
+        }}
+      >
+        <h2>Thank You!</h2>
+        <Box>
+          <Button
+            sx={{ width: 200 }}
+            variant="contained"
+            onClick={() => history.push('/')}
+          >
+            Leave New Feedback
+          </Button>
+        </Box>
+      </Paper>
+    </Container>
   );
 }
 
