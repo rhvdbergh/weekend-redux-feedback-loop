@@ -7,7 +7,8 @@ router.get('/', (req, res) => {
   console.log('GET /admin');
   // build the SQL query
   let query = `
-    SELECT * FROM "feedback";
+    SELECT * FROM "feedback"
+    ORDER BY "date" DESC;
   `;
   pool
     .query(query)

@@ -42,7 +42,7 @@
   ----- STRETCH
   ADMIN PAGE 
 
-  [ ] Server route GET /admin 
+  [x] Server route GET /admin 
     [x] Router
     [ ] Order by date - most recent first
 
