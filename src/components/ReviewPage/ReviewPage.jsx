@@ -19,6 +19,7 @@ function ReviewPage() {
       .post(`/submit`, feedback)
       .then((response) => {
         console.log(response);
+        // take the user to the success page
         history.push('/success');
         // reset the redux store on success
         dispatch({ type: 'RESET_FEEDBACK' });
@@ -35,6 +36,7 @@ function ReviewPage() {
       <p>Understanding: {feedback.understanding}</p>
       <p>Support: {feedback.support}</p>
       <p>Comments: {feedback.comments}</p>
+      {/* Will navigate back to the comments page, where users can navigate back further */}
       <button onClick={() => history.push('/comments')}>Back</button>
       <button onClick={handleSubmit}>Submit</button>
     </div>
