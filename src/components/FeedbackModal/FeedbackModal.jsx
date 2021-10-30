@@ -13,18 +13,30 @@ const modalStyle = {
   p: 4,
 };
 
-function FeedbackModal({ openModal, onModalReject, onModalAccept }) {
+// this component is a modal for feedback throughout the app
+// this keeps styles consistent
+// it takes four props:
+// message is the message the modal displays
+// openModal is a boolean stating whether the modal is open or not
+// onModalReject is a function that the parent component executes on reject
+// on ModalAccept is any action that the parent component executes on accept
+function FeedbackModal({
+  openModal,
+  onModalReject,
+  onModalAccept,
+  message,
+  rejectButton,
+  acceptButton,
+}) {
   return (
-    <Modal open={openModal} onClose={() => setOpenModal(false)}>
+    <Modal open={openModal} onClose={onModalReject}>
       <Box sx={modalStyle}>
         <Box>
-          <Typography variant="h5">
-            Are you sure you want to delete this feedback?
-          </Typography>
+          <Typography variant="h5">{message}</Typography>
         </Box>
         <Box sx={{ display: 'flex', justifyContent: 'flex-end' }}>
-          <Button onClick={onModalReject}>Cancel</Button>
-          <Button onClick={onModalAccept}>Delete</Button>
+          <Button onClick={onModalReject}>{rejectButton}</Button>
+          <Button onClick={onModalAccept}>{acceptButton}</Button>
         </Box>
       </Box>
     </Modal>

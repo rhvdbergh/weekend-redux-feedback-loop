@@ -68,6 +68,9 @@ function FeedBackListItem({ feedback, fetchFeedback }) {
         openModal={openModal}
         onModalReject={() => setOpenModal(false)}
         onModalAccept={() => deleteFeedback()}
+        message="Are you sure you want to delete this feedback?"
+        rejectButton="Cancel"
+        acceptButton="Delete"
       />
     </TableRow>
   );
