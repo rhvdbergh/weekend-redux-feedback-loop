@@ -43,7 +43,7 @@
   ADMIN PAGE 
 
   [ ] Server route GET /admin 
-    [ ] Router
+    [x] Router
     [ ] Order by date - most recent first
 
   [ ] Admin view

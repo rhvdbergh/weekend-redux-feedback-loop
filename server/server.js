@@ -13,6 +13,9 @@ app.use(express.static('build'));
 const submitRouter = require('./routes/submit.router.js');
 app.use('/submit', submitRouter);
 
+const adminRouter = require('./routes/admin.router.js');
+app.use('/admin', adminRouter);
+
 /** ---------- START SERVER ---------- **/
 app.listen(PORT, () => {
   console.log('Listening on port: ', PORT);
