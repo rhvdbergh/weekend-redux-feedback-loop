@@ -29,10 +29,11 @@ function App() {
           <QuestionForm questionType="comments" />
         </Route>
         <Route path="/review" exact>
-          <Header title="Feedback!"></Header>
+          <Header title="Feedback!" />
           <ReviewPage />
         </Route>
         <Route path="/success" exact>
+          <Header title="Feedback Captured!" />
           <SuccessPage />
         </Route>
         <Route path="/admin" exact>

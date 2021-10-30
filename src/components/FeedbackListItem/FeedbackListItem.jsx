@@ -1,30 +1,10 @@
-import {
-  TableCell,
-  TableRow,
-  IconButton,
-  Modal,
-  Button,
-  Box,
-  Typography,
-} from '@mui/material';
+import { TableCell, TableRow, IconButton } from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
 import FlagIcon from '@mui/icons-material/Flag';
 import FlagOutlinedIcon from '@mui/icons-material/FlagOutlined';
 import axios from 'axios';
 import { useState } from 'react';
-
-// the delete confirmation modal style
-const modalStyle = {
-  position: 'absolute',
-  top: '50%',
-  left: '50%',
-  transform: 'translate(-50%, -50%)',
-  bgcolor: 'background.paper',
-  width: 400,
-  border: '2px solid #000',
-  boxShadow: 24,
-  p: 4,
-};
+import FeedbackModal from '../FeedbackModal/FeedbackModal';
 
 function FeedBackListItem({ feedback, fetchFeedback }) {
   // local state for the delete confirmation modal
@@ -84,19 +64,11 @@ function FeedBackListItem({ feedback, fetchFeedback }) {
           <DeleteIcon />
         </IconButton>
       </TableCell>
-      <Modal open={openModal} onClose={() => setOpenModal(false)}>
-        <Box sx={modalStyle}>
-          <Box>
-            <Typography variant="h5">
-              Are you sure you want to delete this feedback?
-            </Typography>
-          </Box>
-          <Box sx={{ display: 'flex', justifyContent: 'flex-end' }}>
-            <Button onClick={() => setOpenModal(false)}>Cancel</Button>
-            <Button onClick={deleteFeedback}>Delete</Button>
-          </Box>
-        </Box>
-      </Modal>
+      <FeedbackModal
+        openModal={openModal}
+        onModalReject={() => setOpenModal(false)}
+        onModalAccept={() => deleteFeedback()}
+      />
     </TableRow>
   );
 }
