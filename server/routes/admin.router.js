@@ -16,12 +16,36 @@ router.get('/', (req, res) => {
       res.send(response.rows);
     })
     .catch((err) => {
-      console.log(`There was an error retrieving data from the databaes:`, err);
+      console.log(`There was an error retrieving data from the database:`, err);
       res.sendStatus(500); // let the client know something went wrong
     });
 });
 
 // TODO: DELETE route to delete single feedback
+router.delete('/:id', (req, res) => {
+  console.log(`DELETE /${req.params.id}`);
+
+  // build the SQL query
+  let query = `
+    DELETE FROM "feedback"
+    WHERE "id" = $1;
+  `;
+
+  // parameterize the input
+  let values = [req.params.id];
+
+  // run the SQL query
+  pool
+    .query(query, values)
+    .then((response) => {
+      // send the client a no content response, indicating delete
+      res.sendStatus(204);
+    })
+    .catch((err) => {
+      console.log(`There was an error deleting data from the database:`, err);
+      res.sendStatus(500); // let the client know something went wrong
+    });
+});
 
 // TODO: PUT route to toggle flag
 

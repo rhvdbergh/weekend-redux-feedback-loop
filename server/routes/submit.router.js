@@ -23,7 +23,7 @@ router.use('/', (req, res) => {
       res.sendStatus(201); // let the client know the db entry was created
     })
     .catch((err) => {
-      console.log(`There was an error posting data to the databaes:`, err);
+      console.log(`There was an error posting data to the database:`, err);
       res.sendStatus(500); // let the client know something went wrong
     });
 });
