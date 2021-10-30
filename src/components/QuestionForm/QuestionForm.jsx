@@ -1,6 +1,10 @@
 import { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
+import Box from '@mui/material/Box';
+import Button from '@mui/material/Button';
+import ButtonGroup from '@mui/material/ButtonGroup';
+import TextField from '@mui/material/TextField';
 
 function QuestionForm({ questionType }) {
   // handle the local state for the form input
@@ -79,7 +83,7 @@ function QuestionForm({ questionType }) {
   };
 
   return (
-    <div>
+    <Box>
       {/* Picks the corresponding message for this questionType
       from the messageFor object  */}
       <p>{messageFor[questionType]}</p>
@@ -102,13 +106,15 @@ function QuestionForm({ questionType }) {
           onChange={(event) => setInputValue(event.target.value)}
         />
       )}
-      {/* Conditional rendering of the back button 
+      <ButtonGroup variant="contained" color="primary">
+        {/* Conditional rendering of the back button 
           which should not display on the feelings view*/}
-      {questionType !== 'feeling' && (
-        <button onClick={() => handleClick('backward')}>Back</button>
-      )}
-      <button onClick={() => handleClick('forward')}>Next</button>
-    </div>
+        {questionType !== 'feeling' && (
+          <Button onClick={() => handleClick('backward')}>Back</Button>
+        )}
+        <Button onClick={() => handleClick('forward')}>Next</Button>
+      </ButtonGroup>
+    </Box>
   );
 }
 
