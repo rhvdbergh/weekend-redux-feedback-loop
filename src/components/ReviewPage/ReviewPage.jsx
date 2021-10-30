@@ -1,6 +1,10 @@
 import axios from 'axios';
 import { useSelector, useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
+import Button from '@mui/material/Button';
+import ButtonGroup from '@mui/material/ButtonGroup';
+import Container from '@mui/material/Container';
+import Paper from '@mui/material/Paper';
 
 function ReviewPage() {
   // retrieve the feedback from the redux store
@@ -30,16 +34,20 @@ function ReviewPage() {
   };
 
   return (
-    <div>
-      <h2>Review Your Feedback</h2>
-      <p>Feeling: {feedback.feeling}</p>
-      <p>Understanding: {feedback.understanding}</p>
-      <p>Support: {feedback.support}</p>
-      <p>Comments: {feedback.comments}</p>
-      {/* Will navigate back to the comments page, where users can navigate back further */}
-      <button onClick={() => history.push('/comments')}>Back</button>
-      <button onClick={handleSubmit}>Submit</button>
-    </div>
+    <Container className="centered" maxWidth="sm">
+      <Paper elevation="6">
+        <h2>Review Your Feedback</h2>
+        <p>Feeling: {feedback.feeling}</p>
+        <p>Understanding: {feedback.understanding}</p>
+        <p>Support: {feedback.support}</p>
+        <p>Comments: {feedback.comments}</p>
+        <ButtonGroup variant="contained">
+          {/* Will navigate back to the comments page, where users can navigate back further */}
+          <Button onClick={() => history.push('/comments')}>Back</Button>
+          <Button onClick={handleSubmit}>Submit</Button>
+        </ButtonGroup>
+      </Paper>
+    </Container>
   );
 }
 

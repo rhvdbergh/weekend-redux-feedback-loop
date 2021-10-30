@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import Box from '@mui/material/Box';
+import Container from '@mui/material/Container';
 import Button from '@mui/material/Button';
 import ButtonGroup from '@mui/material/ButtonGroup';
 import TextField from '@mui/material/TextField';
@@ -9,6 +9,7 @@ import Rating from '@mui/material/Rating';
 import Typography from '@mui/material/Typography';
 import RadioButtonUncheckedIcon from '@mui/icons-material/RadioButtonUnchecked';
 import RadioButtonCheckedIcon from '@mui/icons-material/RadioButtonChecked';
+import { Paper } from '@mui/material';
 
 function QuestionForm({ questionType }) {
   // handle the local state for the form input
@@ -87,37 +88,39 @@ function QuestionForm({ questionType }) {
   };
 
   return (
-    <Box>
-      {/* Picks the corresponding message for this questionType
+    <Container maxWidth="sm">
+      <Paper elevation="6">
+        {/* Picks the corresponding message for this questionType
       from the messageFor object  */}
-      <Typography>{messageFor[questionType]}</Typography>
-      {/* Conditional rendering of type of input */}
-      {/* We need a number box for everything except comments */}
-      {questionType === 'comments' ? (
-        <TextField
-          label="Optional comments ..."
-          value={inputValue}
-          variant="outlined"
-          onChange={(event) => setInputValue(event.target.value)}
-        />
-      ) : (
-        <Rating
-          value={Number(inputValue)}
-          color="primary"
-          icon={<RadioButtonCheckedIcon />}
-          emptyIcon={<RadioButtonUncheckedIcon />}
-          onChange={(event) => setInputValue(event.target.value)}
-        />
-      )}
-      <ButtonGroup variant="contained" color="primary">
-        {/* Conditional rendering of the back button 
-          which should not display on the feelings view*/}
-        {questionType !== 'feeling' && (
-          <Button onClick={() => handleClick('backward')}>Back</Button>
+        <Typography>{messageFor[questionType]}</Typography>
+        {/* Conditional rendering of type of input */}
+        {/* We need a number box for everything except comments */}
+        {questionType === 'comments' ? (
+          <TextField
+            label="Optional comments ..."
+            value={inputValue}
+            variant="outlined"
+            onChange={(event) => setInputValue(event.target.value)}
+          />
+        ) : (
+          <Rating
+            value={Number(inputValue)}
+            color="primary"
+            icon={<RadioButtonCheckedIcon />}
+            emptyIcon={<RadioButtonUncheckedIcon />}
+            onChange={(event) => setInputValue(event.target.value)}
+          />
         )}
-        <Button onClick={() => handleClick('forward')}>Next</Button>
-      </ButtonGroup>
-    </Box>
+        <ButtonGroup variant="contained" color="primary">
+          {/* Conditional rendering of the back button 
+          which should not display on the feelings view*/}
+          {questionType !== 'feeling' && (
+            <Button onClick={() => handleClick('backward')}>Back</Button>
+          )}
+          <Button onClick={() => handleClick('forward')}>Next</Button>
+        </ButtonGroup>
+      </Paper>
+    </Container>
   );
 }
 
