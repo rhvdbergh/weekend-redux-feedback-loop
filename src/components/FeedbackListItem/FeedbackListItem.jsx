@@ -52,6 +52,7 @@ function FeedBackListItem({ feedback, fetchFeedback }) {
       <TableCell>{feedback.comments}</TableCell>
       <TableCell>
         <IconButton onClick={updateFlag}>
+          {/* Conditional rendering of the flag icon, depending on whether this is flagged or not */}
           {feedback.flagged ? (
             <FlagIcon color="secondary" />
           ) : (
@@ -64,6 +65,7 @@ function FeedBackListItem({ feedback, fetchFeedback }) {
           <DeleteIcon />
         </IconButton>
       </TableCell>
+      {/* A modal to give the user feedback, in this case, asking for confirmation on delete */}
       <FeedbackModal
         openModal={openModal}
         onModalReject={() => setOpenModal(false)}

@@ -15,8 +15,14 @@ function QuestionForm({ questionType }) {
   // handle the local state for the form input
   const [inputValue, setInputValue] = useState('');
 
+  // get the initial value from the redux store
+  // if the user had previously given a rating and navigated back to
+  // this page, the previous value will be given, otherwise the default
+  // defined in the redux store
   const initialValue = useSelector((store) => store.feedback[questionType]);
 
+  // on page load, set the initial value of the current feedback in the
+  // local state to the state retrieved from the redux store
   useEffect(() => {
     setInputValue(initialValue);
   }, []);
@@ -45,7 +51,7 @@ function QuestionForm({ questionType }) {
   };
 
   // set the message depending on what kind of question we're dealing with
-  let messageFor = {
+  const messageFor = {
     feeling: 'How are you feeling today?',
     understanding: 'How well are you understanding the content?',
     support: 'How well are you being supported?',

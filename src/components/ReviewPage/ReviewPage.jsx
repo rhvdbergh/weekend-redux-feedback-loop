@@ -28,12 +28,10 @@ function ReviewPage() {
   // set up the history in order to navigate using the useHistory hook
   const history = useHistory();
 
-  console.log(`feedback`, feedback);
-
+  // validate this submission; it must include numbers 1-5 for
+  // feeling, understanding, and support
   const isValidSubmission = () => {
     if (
-      // validate this submission; it must include numbers 1-5 for
-      // feeling, understanding, and support
       '12345'.includes(feedback.feeling) &&
       feedback.feeling !== '' &&
       '12345'.includes(feedback.understanding) &&
@@ -46,9 +44,10 @@ function ReviewPage() {
     return false;
   };
 
+  // handles submit; will first validate before final submission to the server
   const handleSubmit = () => {
+    // validate the input
     if (isValidSubmission) {
-      // validate the input
       axios
         .post(`/submit`, feedback)
         .then((response) => {
@@ -79,7 +78,6 @@ function ReviewPage() {
         }}
       >
         <Typography variant="h3">Review Your Feedback</Typography>
-
         <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
           <Typography sx={{ ml: '120px' }} variant="h6">
             Feeling:{' '}
@@ -117,11 +115,11 @@ function ReviewPage() {
           />
         </Box>
         <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
-          <Typography sx={{ ml: '20px', mr: '10px' }} variant="h6">
+          <Typography sx={{ ml: '50px', mr: '10px' }} variant="h6">
             Comments:
           </Typography>
           <Box sx={{ maxHeight: '100px', overflow: 'scroll' }}>
-            <Typography sx={{ mr: '20px' }} variant="subtitle1">
+            <Typography sx={{ mr: '50px' }} variant="subtitle1">
               {feedback.comments}
             </Typography>
           </Box>
@@ -139,6 +137,7 @@ function ReviewPage() {
           </ButtonGroup>
         </Box>
       </Paper>
+      {/* A modal, closed on default, to communicate feedback to the user (e.g., when validation fails) */}
       <FeedbackModal
         openModal={openModal}
         onModalReject={() => setOpenModal(false)}
